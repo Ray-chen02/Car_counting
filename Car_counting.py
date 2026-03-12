@@ -19,7 +19,7 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
               "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors",
               "search", "hair drier", "toothbrush"
               ]
-mask = cv2.imread("data/mask1.png")
+mask = cv2.imread("data/mask.png")
 
 
 
@@ -75,6 +75,7 @@ while True:
     cv2.putText(img,str(len(totalcount)),(255,100),cv2.FONT_HERSHEY_PLAIN,5,(50,50,255),8)
     cv2.imshow("Image", img)
     cv2.waitKey(1)
+
 
 
 
