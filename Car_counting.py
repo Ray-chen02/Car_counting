@@ -4,10 +4,6 @@ import cvzone
 import math
 from sort import *
 
-# cap = cv2.VideoCapture(0)
-# cap.set(3,1280)
-# cap.set(4,720)
-
 cap = cv2.VideoCapture("data/cars.mp4")
 
 model = YOLO('yolov8l.pt')
@@ -48,7 +44,6 @@ while True:
         for box in boxes:
             x1,y1,x2,y2 = box.xyxy[0]
             x1,y1,x2,y2 = int(x1),int(y1),int(x2),int(y2)
-            #cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,255),3)
             w,h = x2-x1,y2-y1
             
             
@@ -56,8 +51,6 @@ while True:
             cls = int(box.cls[0])
             currentClass = classNames[cls]
             if currentClass == "car" or currentClass == "bus"or currentClass == "truck"or currentClass == "motorbike" and conf > 0.3:
-                # cvzone.putTextRect(img,f'{classNames[cls]} {conf}',(max(0,x1),max(35,y1)),scale = 1,thickness=1,offset= 3)
-                # cvzone.cornerRect(img,(x1,y1,w,h),l=10,rt=5)
                 currentArray = np.array([x1,y1,x2,y2,conf])
                 detections = np.vstack((detections, currentArray))
     resultsTracker = tracker.update(detections)
@@ -80,9 +73,8 @@ while True:
 
     
     cv2.putText(img,str(len(totalcount)),(255,100),cv2.FONT_HERSHEY_PLAIN,5,(50,50,255),8)
-    # cvzone.putTextRect(img,f'Count: {len(totalcount)}',(50,50))
     cv2.imshow("Image", img)
-    # cv2.imshow("imregion", imregion)
     cv2.waitKey(1)
+
 
 
